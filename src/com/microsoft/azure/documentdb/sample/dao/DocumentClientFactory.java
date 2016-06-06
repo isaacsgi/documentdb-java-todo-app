@@ -55,7 +55,7 @@ public class DocumentClientFactory {
     			ObjectMapper mapper = new ObjectMapper();
     		    JsonParser jp = mapper.getFactory().createParser(vcap_services);
     		    JsonNode rootNode = mapper.readTree(jp);
-    		    JsonNode documentDbNode = rootNode.get("documentdb");
+    		    JsonNode documentDbNode = rootNode.get("cs-documentdb");
     		    if(documentDbNode != null){
     		    	System.out.println("brokered service");
     		    	JsonNode credentials = documentDbNode.get(0).get("credentials");
