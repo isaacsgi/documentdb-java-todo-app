@@ -3,6 +3,6 @@ applications:
 - name: azure-documentdb-java-sample-${random-word}
   memory: 1024M
   host: azure-documentdb-java-qa
-  path: ../build-docdb-todo-app/docdb-todo-app/target/azure-documentdb-java-sample-0.0.1-SNAPSHOT.war
+  path: target/azure-documentdb-java-sample-0.0.1-SNAPSHOT.war
   services:
   - qa-doc-db
