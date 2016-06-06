@@ -1,9 +1,0 @@
----
-applications:
-- name: azure-documentdb-java-sample
-  memory: 1024M
-  host: azure-documentdb-java-sample
-  path: target/azure-documentdb-java-sample.war
-  buildpack: java_buildpack_offline
-  services:
-  - documentdb

@@ -21,7 +21,7 @@
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">My Tasks - newbranch 06060855</a>
+        <a class="navbar-brand" href="#">My Tasks - newdemo 1041</a>
       </div>
     </div>
   </div>
