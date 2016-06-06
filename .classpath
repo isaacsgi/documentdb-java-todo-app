@@ -26,5 +26,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/deploy/CloudFoundry/jackson-core-2.5.4.jar"/>
+	<classpathentry kind="lib" path="C:/deploy/CloudFoundry/jackson-databind-2.5.4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -10,13 +10,15 @@ import com.microsoft.azure.documentdb.DocumentClient;
 import com.microsoft.azure.documentdb.DocumentClientException;
 import com.microsoft.azure.documentdb.DocumentCollection;
 import com.microsoft.azure.documentdb.sample.model.TodoItem;
+import com.microsoft.azure.documentdb.sample.model.DocDbCredentials;
+
 
 public class DocDbDao implements TodoDao {
     // The name of our database.
-    private static final String DATABASE_ID = "TestDB";
+    // private static final String DATABASE_ID = "TestDB";
 
     // The name of our collection.
-    private static final String COLLECTION_ID = "TestCollection";
+    // private static final String COLLECTION_ID = "TestCollection";
 
     // We'll use Gson for POJO <=> JSON serialization for this example.
     private static Gson gson = new Gson();
@@ -25,6 +27,9 @@ public class DocDbDao implements TodoDao {
     private static DocumentClient documentClient = DocumentClientFactory
             .getDocumentClient();
 
+    // The DocumentDB Credentials
+    private static DocDbCredentials docDbCredentials = DocumentClientFactory.getDocumentDbCredentials();
+    
     // Cache for the database object, so we don't have to query for it to
     // retrieve self links.
     private static Database databaseCache;
@@ -133,7 +138,7 @@ public class DocDbDao implements TodoDao {
             // Get the database if it exists
             List<Database> databaseList = documentClient
                     .queryDatabases(
-                            "SELECT * FROM root r WHERE r.id='" + DATABASE_ID
+                            "SELECT * FROM root r WHERE r.id='" + docDbCredentials.getDocumentDbName()
                                     + "'", null).getQueryIterable().toList();
 
             if (databaseList.size() > 0) {
@@ -144,7 +149,7 @@ public class DocDbDao implements TodoDao {
                 // Create the database if it doesn't exist.
                 try {
                     Database databaseDefinition = new Database();
-                    databaseDefinition.setId(DATABASE_ID);
+                    databaseDefinition.setId(docDbCredentials.getDocumentDbName());
 
                     databaseCache = documentClient.createDatabase(
                             databaseDefinition, null).getResource();
@@ -166,7 +171,7 @@ public class DocDbDao implements TodoDao {
             List<DocumentCollection> collectionList = documentClient
                     .queryCollections(
                             getTodoDatabase().getSelfLink(),
-                            "SELECT * FROM root r WHERE r.id='" + COLLECTION_ID
+                            "SELECT * FROM root r WHERE r.id='" + docDbCredentials.getDocumentDbResourceId()
                                     + "'", null).getQueryIterable().toList();
 
             if (collectionList.size() > 0) {
@@ -177,7 +182,7 @@ public class DocDbDao implements TodoDao {
                 // Create the collection if it doesn't exist.
                 try {
                     DocumentCollection collectionDefinition = new DocumentCollection();
-                    collectionDefinition.setId(COLLECTION_ID);
+                    collectionDefinition.setId(docDbCredentials.getDocumentDbResourceId());
 
                     collectionCache = documentClient.createCollection(
                             getTodoDatabase().getSelfLink(),
